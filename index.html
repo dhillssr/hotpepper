@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hot Pepper Show | with Pepper Thomas</title>
+<meta name="description" content="The Hot Pepper Show with Pepper Thomas — live interviews, music, and culture streaming on Kick and YouTube.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#D62839;--red-dark:#B01E2C;--orange:#FF6B35;
+  --dark:#0D0D0D;--dark2:#1A1A1A;
+  --gray:#F5F5F5;--gray2:#EBEBEB;
+  --text:#1A1A1A;--muted:#777;--white:#FFFFFF;
+  --ease:.25s ease;--r:12px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white);line-height:1.65;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%;height:auto}
+ul{list-style:none}
+
+/* ── HELPERS ── */
+.container{max-width:1200px;margin:0 auto;padding:0 28px}
+.section-label{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+.section-title{font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.15;color:var(--dark);margin-bottom:16px}
+.section-sub{font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:580px}
+.pad{padding:100px 0}
+
+/* ── LIVE DOT ── */
+.dot{width:9px;height:9px;background:#00FF88;border-radius:50%;display:inline-block;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.35)}}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;font-size:.9rem;font-weight:700;border-radius:50px;border:none;cursor:pointer;transition:transform var(--ease),box-shadow var(--ease),background var(--ease);white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 4px 20px rgba(214,40,57,.35)}
+.btn-red:hover{background:var(--red-dark);box-shadow:0 6px 28px rgba(214,40,57,.5)}
+.btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.55)}
+.btn-ghost:hover{background:rgba(255,255,255,.1);border-color:#fff}
+.btn-dark{background:var(--dark);color:#fff}
+.btn-dark:hover{background:#333}
+
+/* ── NAV ── */
+#nav{position:fixed;inset:0 0 auto;z-index:999;background:rgba(13,13,13,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px;gap:16px}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.45rem;letter-spacing:.04em;color:#fff;line-height:1}
+.logo em{display:block;font-family:'Inter',sans-serif;font-style:normal;font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-top:2px}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{font-size:.84rem;font-weight:500;color:rgba(255,255,255,.65);padding:8px 13px;border-radius:6px;transition:color var(--ease),background var(--ease)}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.nav-live{display:flex;align-items:center;gap:8px;background:var(--red);color:#fff;font-size:.84rem;font-weight:700;padding:10px 22px;border-radius:50px;transition:background var(--ease),transform var(--ease)}
+.nav-live:hover{background:var(--red-dark);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.hamburger span{width:24px;height:2px;background:#fff;border-radius:2px;display:block}
+
+/* ── HERO ── */
+.hero{min-height:100vh;background:var(--dark);position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('https://thehotpeppershow.com/wp-content/uploads/2025/06/HotHead2025-1024x576.png') center top/cover no-repeat;opacity:.4}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,13,13,.9) 0%,rgba(214,40,57,.1) 55%,rgba(13,13,13,.75) 100%)}
+.hero-body{position:relative;z-index:2;padding:130px 0 90px;max-width:740px}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;background:rgba(214,40,57,.15);border:1px solid rgba(214,40,57,.4);color:#ffaaaa;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 16px;border-radius:50px;margin-bottom:28px}
+.hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,10vw,9rem);color:#fff;line-height:.95;margin-bottom:10px}
+.hero-h1 .fire{color:var(--red)}
+.hero-by{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.3rem,2.5vw,2rem);color:var(--orange);letter-spacing:.08em;margin-bottom:22px}
+.hero-p{font-size:1.05rem;color:rgba(255,255,255,.72);max-width:500px;line-height:1.75;margin-bottom:40px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.hero-live{display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;font-size:1rem;font-weight:700;padding:18px 36px;border-radius:50px;box-shadow:0 6px 32px rgba(214,40,57,.5);transition:background var(--ease),transform var(--ease),box-shadow var(--ease)}
+.hero-live:hover{background:var(--red-dark);transform:translateY(-3px);box-shadow:0 10px 44px rgba(214,40,57,.6)}
+.hero-platforms{margin-top:60px;padding-top:36px;border-top:1px solid rgba(255,255,255,.1)}
+.hero-platforms p{font-size:.7rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:16px}
+.plat-row{display:flex;flex-wrap:wrap;gap:20px;align-items:center}
+.plat-row a{opacity:.55;transition:opacity var(--ease),transform var(--ease);filter:brightness(0) invert(1)}
+.plat-row a:hover{opacity:1;transform:translateY(-2px)}
+.plat-row img{height:26px;width:auto;object-fit:contain}
+
+/* ── LIVE STREAM ── */
+.ls{padding:100px 0;background:var(--dark);color:#fff}
+.ls-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.ls-embed{border-radius:var(--r);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5);aspect-ratio:16/9}
+.ls-embed iframe{width:100%;height:100%;border:none;display:block}
+.ls .section-label{color:#ffaaaa}
+.ls-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,4vw,3.8rem);line-height:1;color:#fff;margin-bottom:18px}
+.ls-h2 span{color:var(--red)}
+.ls-p{font-size:1rem;color:rgba(255,255,255,.6);line-height:1.8;margin-bottom:30px}
+.channel-list{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.ch{display:flex;align-items:center;gap:14px;padding:14px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;transition:background var(--ease),border-color var(--ease)}
+.ch:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25)}
+.ch-icon{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1rem;flex-shrink:0;color:#fff}
+.ch-kick{background:linear-gradient(135deg,#1a9e1a,#0f5c0f)}
+.ch-yt{background:#FF0000}
+.ch-text strong{display:block;color:#fff;font-size:.93rem;font-weight:600}
+.ch-text span{color:rgba(255,255,255,.45);font-size:.78rem}
+.ch-arr{margin-left:auto;color:rgba(255,255,255,.3);font-size:1.1rem}
+
+/* ── KICK BANNER ── */
+.kick-banner{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);padding:0}
+.kick-banner img{width:100%;max-height:320px;object-fit:cover;object-position:center;opacity:.85}
+
+/* ── LISTEN ── */
+.listen{padding:100px 0;background:var(--gray)}
+.listen-head{text-align:center;margin-bottom:56px}
+.listen-head .section-sub{margin:0 auto}
+.plat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:16px}
+.plat-card{background:#fff;border-radius:var(--r);padding:30px 20px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.06);transition:transform var(--ease),box-shadow var(--ease)}
+.plat-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,0,0,.12)}
+.plat-card img{height:36px;width:auto;object-fit:contain}
+.plat-card span{font-size:.78rem;font-weight:600;color:var(--muted)}
+
+/* ── MERCH ── */
+.merch{padding:100px 0;background:#fff}
+.merch-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.merch-photo{border-radius:20px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.1)}
+.merch-photo img{width:100%;height:440px;object-fit:cover;transition:transform .4s ease}
+.merch-photo:hover img{transform:scale(1.04)}
+.merch-info .section-sub{color:#666}
+.merch-tag{display:inline-block;background:var(--red);color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.08em;padding:5px 14px;border-radius:50px;margin-bottom:20px}
+.merch-list{display:flex;flex-direction:column;gap:10px;margin:22px 0 36px}
+.merch-list li{display:flex;align-items:center;gap:12px;font-size:.94rem}
+.merch-list li::before{content:'✓';width:22px;height:22px;background:rgba(214,40,57,.1);color:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:900;flex-shrink:0}
+
+/* ── SPOTLIGHT ── */
+.spot{padding:100px 0;background:var(--dark);color:#fff}
+.spot-head{text-align:center;margin-bottom:56px}
+.spot-head .section-label{color:var(--orange)}
+.spot-head .section-title{color:#fff}
+.spot-card{display:grid;grid-template-columns:1fr 1fr;border-radius:20px;overflow:hidden;background:#1a1a1a}
+.spot-gallery{display:grid;grid-template-rows:1fr 1fr;grid-template-columns:1fr 1fr;gap:2px;min-height:420px}
+.spot-gallery img{width:100%;height:100%;object-fit:cover}
+.spot-gallery img:first-child{grid-column:1/-1}
+.spot-info{padding:48px;display:flex;flex-direction:column;justify-content:center}
+.spot-info .section-label{color:var(--orange)}
+.spot-h3{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,3vw,3rem);color:#fff;line-height:1.05;margin-bottom:16px}
+.spot-p{font-size:.97rem;color:rgba(255,255,255,.6);line-height:1.8;margin-bottom:24px}
+.spot-meta{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.spot-row{display:flex;gap:10px;font-size:.85rem;color:rgba(255,255,255,.5)}
+.spot-row strong{color:rgba(255,255,255,.85)}
+.btn-orange{background:var(--orange);color:#fff}
+.btn-orange:hover{background:#e85e29}
+
+/* ── GUESTS ── */
+.guests{padding:100px 0;background:var(--gray)}
+.guests-head{text-align:center;margin-bottom:56px}
+.guests-head .section-sub{margin:0 auto}
+.guests-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.g-card{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/3;display:block;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,.15);transition:transform var(--ease),box-shadow var(--ease)}
+.g-card:hover{transform:translateY(-5px);box-shadow:0 14px 36px rgba(0,0,0,.25)}
+.g-card img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease;display:block}
+.g-card:hover img{transform:scale(1.06)}
+.g-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.72) 0%,rgba(0,0,0,.18) 45%,transparent 100%)}
+.g-name{position:absolute;bottom:18px;left:18px;right:18px;font-size:1.15rem;font-weight:700;color:#fff;line-height:1.2;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+
+/* ── PARTNERS ── */
+.partners{padding:100px 0;background:#fff}
+.partners-head{text-align:center;margin-bottom:56px}
+.partners-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px}
+.p-card{background:var(--gray);border-radius:var(--r);padding:30px 20px;display:flex;align-items:center;justify-content:center;min-height:110px;transition:transform var(--ease),box-shadow var(--ease);overflow:hidden}
+.p-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.p-card img{max-height:60px;width:auto;object-fit:contain;max-width:160px}
+
+/* ── CONTACT ── */
+.contact{padding:100px 0;background:var(--dark);color:#fff}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.contact-info .section-label{color:#ffaaaa}
+.contact-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,4vw,4rem);color:#fff;line-height:1;margin-bottom:18px}
+.contact-p{font-size:.97rem;color:rgba(255,255,255,.55);line-height:1.8;margin-bottom:36px}
+.socials{display:flex;flex-wrap:wrap;gap:10px}
+.soc{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;transition:background var(--ease),transform var(--ease),border-color var(--ease)}
+.soc:hover{background:var(--red);border-color:var(--red);transform:translateY(-2px)}
+.soc svg{width:17px;height:17px}
+.form{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:.75rem;font-weight:600;letter-spacing:.05em;color:rgba(255,255,255,.5)}
+.field input,.field textarea{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:8px;padding:13px 15px;font-family:'Inter',sans-serif;font-size:.93rem;color:#fff;outline:none;resize:none;transition:border-color var(--ease),background var(--ease)}
+.field input:focus,.field textarea:focus{border-color:var(--red);background:rgba(255,255,255,.09)}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.2)}
+
+/* ── FOOTER ── */
+footer{background:#080808;padding:52px 0 28px;border-top:1px solid rgba(255,255,255,.05)}
+.foot-top{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:start;margin-bottom:40px}
+.foot-logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:#fff;letter-spacing:.04em}
+.foot-logo em{display:block;font-family:'Inter',sans-serif;font-style:normal;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-top:2px}
+.foot-tag{font-size:.82rem;color:rgba(255,255,255,.3);line-height:1.65;margin-top:12px;max-width:310px}
+.foot-nav{display:flex;flex-wrap:wrap;gap:6px 22px}
+.foot-nav a{font-size:.82rem;color:rgba(255,255,255,.45);transition:color var(--ease)}
+.foot-nav a:hover{color:#fff}
+.foot-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,.05)}
+.foot-copy{font-size:.78rem;color:rgba(255,255,255,.28)}
+.foot-soc{display:flex;gap:8px}
+.foot-soc a{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:background var(--ease)}
+.foot-soc a:hover{background:var(--red);border-color:var(--red)}
+.foot-soc svg{width:14px;height:14px}
+
+/* ── REVEAL ── */
+.rev{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
+.rev.on{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .pad{padding:72px 0}
+  .nav-links{display:none;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:rgba(13,13,13,.97);padding:16px 28px;gap:2px;z-index:998}
+  .nav-links.open{display:flex}
+  .hamburger{display:flex}
+  .ls-grid,.merch-grid,.spot-card,.contact-grid{grid-template-columns:1fr;gap:40px}
+  .guests-grid{grid-template-columns:repeat(2,1fr)}
+  .spot-gallery{min-height:240px}
+  .spot-info{padding:32px}
+  .foot-top{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .hero-ctas{flex-direction:column;align-items:flex-start}
+  .hero-live,.hero-ctas .btn-ghost{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#home" class="logo">The Hot Pepper Show<em>with Pepper Thomas</em></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#livestream">Live Stream</a></li>
+        <li><a href="#listen">Listen</a></li>
+        <li><a href="#merch">Merch</a></li>
+        <li><a href="#guests">Guests</a></li>
+        <li><a href="#partners">Partners</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="https://kick.com/hotpeppershow" target="_blank" rel="noopener" class="nav-live">
+        <span class="dot"></span> WATCH LIVE
+      </a>
+      <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-body rev">
+      <div class="hero-badge"><span class="dot"></span> STREAMING LIVE ON KICK &amp; YOUTUBE</div>
+      <h1 class="hero-h1">The Hot<br><span class="fire">Pepper</span><br>Show</h1>
+      <p class="hero-by">with Pepper Thomas</p>
+      <p class="hero-p">Interviews, music, and real conversations with today's top artists. Austin's hottest multimedia platform — streaming live every week.</p>
+      <div class="hero-ctas">
+        <a href="https://kick.com/hotpeppershow" target="_blank" rel="noopener" class="hero-live">
+          <span class="dot"></span> WATCH LIVE ON KICK
+        </a>
+        <a href="https://www.youtube.com/@TheHotPepperShowTV" target="_blank" rel="noopener" class="btn btn-ghost">
+          Watch on YouTube
+        </a>
+      </div>
+      <div class="hero-platforms">
+        <p>Also available on</p>
+        <div class="plat-row">
+          <a href="#listen"><img src="https://thehotpeppershow.com/wp-content/uploads/2023/12/logo-spotify-Copy.png" alt="Spotify"></a>
+          <a href="#listen"><img src="https://thehotpeppershow.com/wp-content/uploads/2023/12/amazon-music4421.jpg" alt="Amazon Music"></a>
+          <a href="#listen"><img src="https://thehotpeppershow.com/wp-content/uploads/2023/12/1200px-IHeartRadio_logo.png" alt="iHeart Radio"></a>
+          <a href="#listen"><img src="https://thehotpeppershow.com/wp-content/uploads/2023/12/KAZI.png" alt="KAZI FM"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KICK BANNER -->
+<div class="kick-banner">
+  <img src="https://thehotpeppershow.com/wp-content/uploads/2025/10/with-PEPPER-THOMAS.png" alt="The Hot Pepper Show with Pepper Thomas on Kick">
+</div>
+
+<!-- LIVE STREAM -->
+<section id="livestream" class="ls">
+  <div class="container">
+    <div class="ls-grid">
+      <div class="ls-embed rev">
+        <iframe src="https://player.kick.com/hotpeppershow" allowfullscreen loading="lazy" title="The Hot Pepper Show Live on Kick"></iframe>
+      </div>
+      <div class="rev">
+        <span class="section-label">Live Every Week</span>
+        <h2 class="ls-h2">Catch Us<br><span>Live</span></h2>
+        <p class="ls-p">Join Pepper Thomas for in-depth interviews, music performances, and candid conversations with today's top artists. No scripts, no filters — just real talk.</p>
+        <div class="channel-list">
+          <a href="https://kick.com/hotpeppershow" target="_blank" rel="noopener" class="ch">
+            <div class="ch-icon ch-kick">K</div>
+            <div class="ch-text"><strong>Kick Live Stream</strong><span>kick.com/hotpeppershow</span></div>
+            <span class="ch-arr">→</span>
+          </a>
+          <a href="https://www.youtube.com/@TheHotPepperShowTV" target="_blank" rel="noopener" class="ch">
+            <div class="ch-icon ch-yt">▶</div>
+            <div class="ch-text"><strong>YouTube Channel</strong><span>@TheHotPepperShowTV</span></div>
+            <span class="ch-arr">→</span>
+          </a>
+        </div>
+        <a href="https://kick.com/hotpeppershow" target="_blank" rel="noopener" class="btn btn-red">
+          <span class="dot"></span> Join the Live Stream
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LISTEN -->
+<section id="listen" class="listen">
+  <div class="container">
+    <div class="listen-head rev">
+      <span class="section-label">Listen Everywhere</span>
+      <h2 class="section-title">Tune In On Your<br>Favorite Platform</h2>
+      <p class="section-sub">The Hot Pepper Show is available on all major platforms. Catch up on episodes and never miss a beat.</p>
+    </div>
+    <div class="plat-grid rev">
+      <a href="https://open.spotify.com" target="_blank" rel="noopener" class="plat-card">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2023/12/logo-spotify-Copy.png" alt="Spotify">
+        <span>Spotify</span>
+      </a>
+      <a href="https://music.amazon.com" target="_blank" rel="noopener" class="plat-card">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2023/12/amazon-music4421.jpg" alt="Amazon Music">
+        <span>Amazon Music</span>
+      </a>
+      <a href="https://www.iheart.com" target="_blank" rel="noopener" class="plat-card">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2023/12/1200px-IHeartRadio_logo.png" alt="iHeart Radio">
+        <span>iHeart Radio</span>
+      </a>
+      <a href="https://kazifm.org" target="_blank" rel="noopener" class="plat-card">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2023/12/KAZI.png" alt="KAZI FM">
+        <span>KAZI FM</span>
+      </a>
+      <a href="https://www.deezer.com" target="_blank" rel="noopener" class="plat-card">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2023/12/png-clipart-youtube-live-television-channel-streaming-media-youtube-television-text.png" alt="YouTube">
+        <span>YouTube</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MERCH -->
+<section id="merch" class="merch">
+  <div class="container">
+    <div class="merch-grid">
+      <div class="merch-photo rev">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2025/09/Pep-Squad-Shirt-1024x768.jpg" alt="Pepper Squad Gear">
+      </div>
+      <div class="rev">
+        <span class="section-label">Official Merch</span>
+        <div class="merch-tag">Pepper Squad Gear</div>
+        <h2 class="section-title">Rep the Show.<br>Join the Squad.</h2>
+        <p class="section-sub" style="color:#666">Official Hot Pepper Show merchandise — premium quality apparel to show your love for real music and real conversations.</p>
+        <ul class="merch-list">
+          <li>Premium quality apparel</li>
+          <li>Official Hot Pepper Show branding</li>
+          <li>Support the show directly</li>
+          <li>Limited edition drops</li>
+        </ul>
+        <a href="https://thehotpeppershow.com/shop-pep.htm" target="_blank" rel="noopener" class="btn btn-red">Shop Now Online</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS SPOTLIGHT -->
+<section id="spotlight" class="spot">
+  <div class="container">
+    <div class="spot-head rev">
+      <span class="section-label" style="color:var(--orange)">Business Spotlight</span>
+      <h2 class="section-title" style="color:#fff">Featured Community Partner</h2>
+    </div>
+    <div class="spot-card rev">
+      <div class="spot-gallery">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2025/04/Saltt-1.jpg" alt="Saltt Restaurant">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2025/04/saltt.jpg" alt="Saltt Interior">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2025/04/saltt-2.jpg" alt="Saltt Food">
+      </div>
+      <div class="spot-info">
+        <span class="section-label" style="color:var(--orange)">Austin, TX</span>
+        <h3 class="spot-h3">Saltt Restaurant</h3>
+        <p class="spot-p">"At Saltt, we believe in the power of food to bring people together and create unforgettable moments." Southern-inspired seafood celebrating Southeast Texas flavors.</p>
+        <div class="spot-meta">
+          <div class="spot-row">
+            <span>📍</span>
+            <span><strong>Address</strong><br>2525 W Anderson Ln. Ste 130 Bldg 3, Austin, TX 78757</span>
+          </div>
+          <div class="spot-row">
+            <span>📞</span>
+            <span><strong>Phone</strong><br>+1 (512) 369-3568</span>
+          </div>
+        </div>
+        <a href="https://www.austinsveryownsaltt.com" target="_blank" rel="noopener" class="btn btn-orange">Visit Saltt →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUESTS -->
+<section id="guests" class="guests">
+  <div class="container">
+    <div class="guests-head rev">
+      <span class="section-label">Past Shows</span>
+      <h2 class="section-title">Notable Guests</h2>
+      <p class="section-sub">A conversation with the best in music. These artists have sat across from Pepper Thomas for real, memorable interviews.</p>
+    </div>
+    <div class="guests-grid rev">
+      <a href="https://www.youtube.com/watch?v=g_Lk4Clo-30&t=2101s" target="_blank" rel="noopener" class="g-card">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2024/10/FB_IMG_1732247500438.jpg" alt="Eric Roberson">
+        <div class="g-overlay"></div>
+        <div class="g-name">Eric Roberson</div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=hlPtGOYQpoM&t=14s" target="_blank" rel="noopener" class="g-card">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2024/10/IMG_0504-scaled.jpg" alt="Shonn Hinton">
+        <div class="g-overlay"></div>
+        <div class="g-name">Shonn Hinton</div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=xiHvZJovMFk&t=1693s" target="_blank" rel="noopener" class="g-card">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2024/09/IMG_0587-2-1.jpg" alt="David P. Stevens">
+        <div class="g-overlay"></div>
+        <div class="g-name">David P. Stevens</div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=gy-caQC2rvY&t=6127s" target="_blank" rel="noopener" class="g-card">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2024/12/Algebra-Blesset.jpg" alt="Algebra Blessset">
+        <div class="g-overlay"></div>
+        <div class="g-name">Algebra Blessset</div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=hMxyq0ZIVAs&t=24s" target="_blank" rel="noopener" class="g-card">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2024/12/Darien-Brockington.jpg" alt="Darien Brockington">
+        <div class="g-overlay"></div>
+        <div class="g-name">Darien Brockington</div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=RScnpJqN8Rk&t=2713s" target="_blank" rel="noopener" class="g-card">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2024/12/Wayna.jpg" alt="Wayna">
+        <div class="g-overlay"></div>
+        <div class="g-name">Wayna</div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=hckbTFPhHKM" target="_blank" rel="noopener" class="g-card">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2024/12/Toy-Taha.jpg" alt="Toy Taha">
+        <div class="g-overlay"></div>
+        <div class="g-name">Toy Taha</div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=WKPmZ6TywZA&t=5s" target="_blank" rel="noopener" class="g-card">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2024/12/Pat-Williams.jpg" alt="Pat Williams">
+        <div class="g-overlay"></div>
+        <div class="g-name">Pat Williams</div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=WKPmZ6TywZA&t=5s" target="_blank" rel="noopener" class="g-card">
+        <img src="https://thehotpeppershow.com/wp-content/uploads/2024/12/Dwele.jpg" alt="Dwele">
+        <div class="g-overlay"></div>
+        <div class="g-name">Dwele</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="partners" class="partners">
+  <div class="container">
+    <div class="partners-head rev">
+      <span class="section-label">Our Partners</span>
+      <h2 class="section-title">Proud Sponsors &amp;<br>Community Partners</h2>
+    </div>
+    <div class="partners-grid rev">
+      <div class="p-card"><img src="https://thehotpeppershow.com/wp-content/uploads/2025/04/LEBODY-SPA-THUMB.jpg" alt="Le Body Spa" style="border-radius:6px"></div>
+      <div class="p-card"><img src="https://thehotpeppershow.com/wp-content/uploads/2025/02/A-Life-Celebration.png" alt="A Life Celebration"></div>
+      <div class="p-card"><img src="https://thehotpeppershow.com/wp-content/uploads/2025/02/Dias-Market2.jpg" alt="Dias Market" style="border-radius:6px"></div>
+      <div class="p-card"><img src="https://thehotpeppershow.com/wp-content/uploads/2024/11/BCW2024.png" alt="Black Cotton Works"></div>
+      <div class="p-card"><img src="https://thehotpeppershow.com/wp-content/uploads/2023/12/KAZI.png" alt="KAZI FM"></div>
+      <div class="p-card"><img src="https://thehotpeppershow.com/wp-content/uploads/2025/08/UMCFest-2025.jpg" alt="UMCFest 2025" style="border-radius:6px"></div>
+      <div class="p-card"><img src="https://thehotpeppershow.com/wp-content/uploads/2025/10/Alkebulin-2025-1-e1759438181591.jpg" alt="Alkebulin 2025" style="border-radius:6px"></div>
+      <div class="p-card"><img src="https://thehotpeppershow.com/wp-content/uploads/2023/12/Invoice-Graphic.jpg" alt="Sponsor" style="border-radius:6px"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="rev">
+        <span class="section-label">Get In Touch</span>
+        <h2 class="contact-h2">Let's Start<br>A Conversation</h2>
+        <p class="contact-p">Want to be on the show? Interested in sponsorship? Have a question or business inquiry? Reach out — Pepper Thomas wants to hear from you.</p>
+        <div class="socials">
+          <a href="#" class="soc" aria-label="Facebook">
+            <svg fill="white" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com" target="_blank" rel="noopener" class="soc" aria-label="Instagram">
+            <svg fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="soc" aria-label="TikTok">
+            <svg fill="white" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.77 0 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0 0 12.68 6.34 6.34 0 0 0 6.33-6.34V8.78a8.18 8.18 0 0 0 4.78 1.52V6.85a4.85 4.85 0 0 1-1.01-.16z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@TheHotPepperShowTV" target="_blank" rel="noopener" class="soc" aria-label="YouTube">
+            <svg fill="white" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+          </a>
+        </div>
+      </div>
+      <form class="form rev" onsubmit="return false">
+        <div class="form-row">
+          <div class="field"><label>First Name</label><input type="text" placeholder="Your first name"></div>
+          <div class="field"><label>Last Name</label><input type="text" placeholder="Your last name"></div>
+        </div>
+        <div class="field"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+        <div class="field"><label>Subject</label><input type="text" placeholder="What's this about?"></div>
+        <div class="field"><label>Message</label><textarea rows="5" placeholder="Tell Pepper Thomas what's on your mind..."></textarea></div>
+        <button type="submit" class="btn btn-red" style="align-self:flex-start;padding:15px 36px">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-top">
+      <div>
+        <div class="foot-logo">The Hot Pepper Show<em>with Pepper Thomas</em></div>
+        <p class="foot-tag">Austin's hottest multimedia platform — interviews, live streams, and music celebrating artists and culture.</p>
+      </div>
+      <nav class="foot-nav">
+        <a href="#home">Home</a>
+        <a href="#livestream">Live Stream</a>
+        <a href="#listen">Listen</a>
+        <a href="#merch">Merch</a>
+        <a href="#guests">Guests</a>
+        <a href="#partners">Partners</a>
+        <a href="#contact">Contact</a>
+        <a href="https://thehotpeppershow.com/shop-pep.htm" target="_blank" rel="noopener">Shop</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-copy">© 2025 The Hot Pepper Show with Pepper Thomas. All Rights Reserved.</p>
+      <div class="foot-soc">
+        <a href="#" aria-label="Facebook"><svg fill="white" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="https://www.youtube.com/@TheHotPepperShowTV" target="_blank" rel="noopener" aria-label="YouTube"><svg fill="white" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on') });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
